@@ -2,32 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory; // Tambahkan ini
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens; // Tambahkan ini untuk API Token
 
 class User extends Authenticatable
 {
-    use Notifiable;
-    public $timestamps = false;
+    // Tambahkan trait yang diperlukan
+    use HasApiTokens, HasFactory, Notifiable;
 
-    // Nama tabel eksplisit (default Laravel: 'users', tapi model ini memakai 'Users')
+    // public $timestamps = false; <-- HAPUS BARIS INI
+
     protected $table = 'users';
 
-    protected $primaryKey = 'id';
-
-    // Kolom yang bisa diisi massal
     protected $fillable = [
         'username',
         'password',
         'role',
     ];
 
-    // Kolom yang disembunyikan saat serialisasi
     protected $hidden = [
         'password',
+        'remember_token', // Tambahkan ini
     ];
 
-    // Tipe data enum untuk role (opsional, validasi di model)
-    // public const ROLE_ADMIN = 'admin';
-    // public const ROLE_VIEWER = 'viewer';
+    // Tambahkan ini untuk hashing password otomatis (best practice)
+    protected $casts = [
+        'password' => 'hashed',
+    ];
 }

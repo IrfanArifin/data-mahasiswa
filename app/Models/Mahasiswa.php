@@ -9,25 +9,10 @@ class Mahasiswa extends Model
 {
     use HasFactory;
 
-    /**
-     * Nama tabel yang terhubung dengan model ini.
-     *
-     * @var string
-     */
     protected $table = 'mahasiswa';
 
-    /**
-     * Menonaktifkan timestamps (created_at dan updated_at).
-     *
-     * @var bool
-     */
-    public $timestamps = false;
+    // public $timestamps = false; <-- HAPUS BARIS INI
 
-    /**
-     * Atribut yang dapat diisi secara massal.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'nim',
         'nama',
