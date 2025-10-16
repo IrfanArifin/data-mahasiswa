@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 
 Route::get('/', function () {
-    return view('welcome');
+    return File::get(public_path('index.html'));
 });
 
 Route::get('/dashboard', function () {
